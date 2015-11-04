@@ -3,18 +3,34 @@ require_once 'lib/tesseract-php/TesseractOCR/TesseractOCR.php';
 //valid file
 ?>
 <h1> This's valid process initialization file </h1>
+Let's do this!
+<br/>
 
 <?php
-$files = glob('images/*.{jpg,png,gif}', GLOB_BRACE);
-foreach ($files as $file)
+//min id = 102
+
+function goOCR($id)
 {
-    $tesseract = new TesseractOCR($file);
-    $tesseract->setLanguage('pol');
-    $tesseract->setTempDir('./temp');
-    //$tesseract->setWhitelist(range('A','Z'));
-    echo "Begin " . $file . "<br/><br/>";
-    echo "IMAGE : " . "<img src='" . $file . "'/><br/><br/>";
-    echo $tesseract->recognize();
-    echo "<br/><br/>Done " . $file . "<br/><br/>";
+    $content = file_get_contents('http://www.fabrykasily.pl/upload/motivation/id_'.$id.'_next_1500x2000.jpg');
+    $file = './temp/temp'.$id.'.jpg';
+    file_put_contents($file, $content);
+    if(filesize($file) > 0)
+    {
+        $tesseract = new TesseractOCR($file);
+        $tesseract->setLanguage('pol');
+        $tesseract->setTempDir('./temp');
+        //$tesseract->setWhitelist(range('A','Z'));
+        return $tesseract->recognize();
+        unlink($file);
+    }
+    else   
+    {
+        return '___________________INVALID MEM_____________________';
+    }
 }
 
+
+for($i = 102; $i <= 120; $i++)
+{
+    echo 'ID : ' . $i . ' : ' . '<a href="http://www.fabrykasily.pl/upload/motivation/id_'.$i.'_next_1500x2000.jpg">[LINK]</a>&nbsp; OCR: '. goOCR($i) . '<br/>';
+}
