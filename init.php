@@ -29,8 +29,10 @@ function goOCR($id)
     }
 }
 
+$start = 10000;
+$stop  = 10050;
 
-for($i = 102; $i <= 120; $i++)
+for($i = $start; $i <= $stop; $i++)
 {
     echo 'ID : ' . $i . ' : ' . '<a href="http://www.fabrykasily.pl/upload/motivation/id_'.$i.'_next_1500x2000.jpg">[LINK]</a>&nbsp; OCR: '. goOCR($i) . '<br/>';
 }
