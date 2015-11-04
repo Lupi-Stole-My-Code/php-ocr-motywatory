@@ -1,4 +1,2 @@
-<?php
-?>
 Go away!
 
