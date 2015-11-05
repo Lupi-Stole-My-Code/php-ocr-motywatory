@@ -25,7 +25,7 @@ function goOCR($id)
     }
     else   
     {
-        return '___________________INVALID MEM_____________________';
+        return '___________________INVALID MEME_____________________';
     }
 }
 
